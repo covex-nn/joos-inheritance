@@ -1,0 +1,19 @@
+{
+  "name" : "joos-inheritance",
+  "version" : "1.0.0",
+  "description" : "Javascript class inheritance",
+  "main" : "joos.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/covex-nn/joos-inheritance"
+  },
+  "scripts" : {
+    "test" : "node test.js"
+  },
+  "keywords" : [
+    "class",
+    "inheritance"
+  ],
+  "author" : "Andrey F. Mindubaev",
+  "license" : "MIT"
+}
