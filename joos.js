@@ -70,15 +70,28 @@ var JooS = {
                     method.__parent = function(a1, a2, a3) {
                         var o = __parent, r;
 
-                        __parent = o.__parent;
-                        switch (arguments.length) {
-                            case 0:  r = __thisObj[o.__name](); break;
-                            case 1:  r = __thisObj[o.__name](a1); break;
-                            case 2:  r = __thisObj[o.__name](a1, a2); break;
-                            case 3:  r = __thisObj[o.__name](a1, a2, a3); break;
-                            default: r = o.apply(__thisObj, arguments);
+                        if (o.__name) {
+                            __parent = o.__parent;
+                            switch (arguments.length) {
+                                case 0:
+                                    r = __thisObj[o.__name]();
+                                    break;
+                                case 1:
+                                    r = __thisObj[o.__name](a1);
+                                    break;
+                                case 2:
+                                    r = __thisObj[o.__name](a1, a2);
+                                    break;
+                                case 3:
+                                    r = __thisObj[o.__name](a1, a2, a3);
+                                    break;
+                                default:
+                                    r = o.apply(__thisObj, arguments);
+                            }
+                            __parent = o;
+                        } else {
+                            r = o.apply(__thisObj, arguments);
                         }
-                        __parent = o;
 
                         return r;
                     };

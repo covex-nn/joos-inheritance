@@ -2,6 +2,35 @@ var JooS = require("./joos");
 var assert = require("assert");
 
 /**
+ * Class Function0
+ * @constructor
+ */
+var Function0 = function(value0) {
+    this.value0 = value0;
+};
+
+Function0.prototype.method1 = function() {
+    return this.value0;
+};
+
+/**
+ * @class Class0
+ * @extends Function0
+ */
+var Class0 = JooS.Reflect(
+    Function0,
+    /** @lends Class0 */
+    {
+        __constructor: function(value0) {
+            this.__constructor.__parent(value0);
+        },
+        method1: function() {
+            return "[" + this.method1.__parent() + "]";
+        }
+    }
+);
+
+/**
  * @class Class1
  * @augments JooS.Class
  */
@@ -39,8 +68,13 @@ var Class2 = JooS.Reflect(
     }
 );
 
-var a1 = new Class1("qwerty");
-var a2 = new Class2("qwerty", "asdf");
+// test inheritance constructor & methods for "native" prototype
+var a0 = new Class0("zxcv");
+assert(a0.method1(), "[zxcv]");
 
+// test inheritance for "joos" classes
+var a1 = new Class1("qwerty");
 assert.equal(a1.method1(), "qwerty", "");
+
+var a2 = new Class2("qwerty", "asdf");
 assert.equal(a2.method1(), "asdf[qwerty]");
