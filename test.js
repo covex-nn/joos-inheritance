@@ -68,13 +68,34 @@ var Class2 = JooS.Reflect(
     }
 );
 
+// test Value
+var v0 = 1, joosV1 = JooS.Value(v0);
+assert(joosV1 instanceof Function, "JooS.Value returns Function");
+assert(joosV1(), v0, "Return stored value");
+
+// test Closure
+var obj0 = { name : "qwerty1" };
+var method0 = function() {
+    return this.name;
+};
+var closure0 = JooS.Closure(obj0, method0);
+assert(closure0 instanceof Function, "JooS.Closure returns Function");
+assert(closure0(), obj0.name, "Method binded to object");
+
 // test inheritance constructor & methods for "native" prototype
 var a0 = new Class0("zxcv");
-assert(a0.method1(), "[zxcv]");
+assert.equal(a0.method1(), "[zxcv]", "Class0::method1 must call parent Function0::method1");
+assert(a0 instanceof Class0, "a0 must be instanceof Class0");
+assert(a0 instanceof Function0, "a0 must be instanceof Function0");
 
 // test inheritance for "joos" classes
 var a1 = new Class1("qwerty");
 assert.equal(a1.method1(), "qwerty", "");
+assert(a1 instanceof Class1, "a1 must be instanceof Class1");
+assert(a1 instanceof JooS.Class, "a1 must be instanceof JooS.Class");
 
 var a2 = new Class2("qwerty", "asdf");
 assert.equal(a2.method1(), "asdf[qwerty]");
+assert(a2 instanceof Class2, "a2 must be instanceof Class2");
+assert(a2 instanceof Class1, "a2 must be instanceof Class1");
+assert(a2 instanceof JooS.Class, "a2 must be instanceof JooS.Class");
