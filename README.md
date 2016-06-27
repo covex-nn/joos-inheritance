@@ -43,7 +43,7 @@ var Class0 = JooS.Reflect(
 
 /**
  * @class NewClass1
- * @extends Function0
+ * @extends Class0
  */
 var NewClass1 = JooS.Reflect(
     Class0,
